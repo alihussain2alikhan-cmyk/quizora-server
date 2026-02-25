@@ -42,6 +42,11 @@ app.use("/api/quizzes", quizRoutes);
 app.use("/api/analytics", require("./routes/analyticsRoutes"));
 app.use("/api/sessions", require("./routes/sessionRoutes"));
 
+// SPA Fallback: All non-API routes serve index.html
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/index.html"));
+});
+
 // Error handling
 app.use(notFound);
 app.use(errorHandler);
